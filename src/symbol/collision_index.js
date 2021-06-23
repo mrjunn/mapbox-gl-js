@@ -71,9 +71,14 @@ class CollisionIndex {
         this.fogState = fogState;
     }
 
+<<<<<<< HEAD
     placeCollisionBox(scale: number, collisionBox: SingleCollisionBox, shift: Point, allowOverlap: boolean, textPixelRatio: number, posMatrix: mat4, collisionGroupPredicate?: any): { box: Array<number>, offscreen: boolean } {
         assert(!this.transform.elevation || collisionBox.elevation !== undefined);
         const projectedPoint = this.projectAndGetPerspectiveRatio(posMatrix, collisionBox.anchorPointX, collisionBox.anchorPointY, collisionBox.elevation, collisionBox.tileID);
+=======
+    placeCollisionBox(collisionBox: SingleCollisionBox, allowOverlap: boolean, textPixelRatio: number, posMatrix: mat4, collisionGroupPredicate?: any): { box: Array<number>, offscreen: boolean } {
+        const projectedPoint = this.projectAndGetPerspectiveRatio(posMatrix, collisionBox.anchorPointX, collisionBox.anchorPointY, collisionBox.anchorPointZ);
+>>>>>>> 3993-z-offset
         const tileToViewport = textPixelRatio * projectedPoint.perspectiveRatio;
         const tlX = (collisionBox.x1 * scale + shift.x - collisionBox.padding) * tileToViewport + projectedPoint.point.x;
         const tlY = (collisionBox.y1 * scale + shift.y - collisionBox.padding) * tileToViewport + projectedPoint.point.y;
@@ -372,10 +377,16 @@ class CollisionIndex {
                 behindFog = fogOpacity > FOG_SYMBOL_CLIPPING_THRESHOLD;
             }
 
+<<<<<<< HEAD
             aboveHorizon = p[2] > p[3] || behindFog;
         } else {
             projection.xyTransformMat4(p, p, posMatrix);
         }
+=======
+    projectAndGetPerspectiveRatio(posMatrix: mat4, x: number, y: number, z: number) {
+        const p = [x, y, z, 1];
+        projection.xyTransformMat4(p, p, posMatrix);
+>>>>>>> 3993-z-offset
         const a = new Point(
             (((p[0] / p[3] + 1) / 2) * this.transform.width) + viewportPadding,
             (((-p[1] / p[3] + 1) / 2) * this.transform.height) + viewportPadding

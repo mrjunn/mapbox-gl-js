@@ -1,7 +1,7 @@
 attribute vec4 a_pos_offset;
 attribute vec4 a_data;
 attribute vec4 a_pixeloffset;
-attribute vec3 a_projected_pos;
+attribute vec4 a_projected_pos;
 attribute float a_fade_opacity;
 
 uniform bool u_is_size_zoom_constant;
@@ -41,7 +41,7 @@ void main() {
     vec2 a_pxoffset = a_pixeloffset.xy;
     vec2 a_minFontScale = a_pixeloffset.zw / 256.0;
 
-    highp float segment_angle = -a_projected_pos[2];
+    highp float segment_angle = -a_projected_pos[3];
     float size;
 
     if (!u_is_size_zoom_constant && !u_is_size_feature_constant) {
@@ -84,6 +84,7 @@ void main() {
     highp float angle_cos = cos(segment_angle + symbol_rotation);
     mat2 rotation_matrix = mat2(angle_cos, -1.0 * angle_sin, angle_sin, angle_cos);
 
+<<<<<<< HEAD
     vec4 projected_pos = u_label_plane_matrix * vec4(a_projected_pos.xy, h, 1.0);
     float z = 0.0;
     vec2 offset = rotation_matrix * (a_offset / 32.0 * max(a_minFontScale, fontScale) + a_pxoffset / 16.0);
@@ -94,6 +95,10 @@ void main() {
     // Symbols might end up being behind the camera. Move them AWAY.
     float occlusion_fade = occlusionFade(projectedPoint);
     gl_Position = mix(u_coord_matrix * vec4(projected_pos.xy / projected_pos.w + offset, z, 1.0), AWAY, float(projectedPoint.w <= 0.0 || occlusion_fade == 0.0));
+=======
+    vec4 projected_pos = u_label_plane_matrix * vec4(a_projected_pos.xyz, 1.0);
+    gl_Position = u_coord_matrix * vec4(projected_pos.xy / projected_pos.w + rotation_matrix * (a_offset / 32.0 * max(a_minFontScale, fontScale) + a_pxoffset / 16.0), projected_pos.z, 1.0);
+>>>>>>> 3993-z-offset
 
     v_tex = a_tex / u_texsize;
     vec2 fade_opacity = unpack_opacity(a_fade_opacity);

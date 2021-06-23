@@ -116,6 +116,7 @@
     browserslist "^4.14.5"
     semver "^5.5.0"
 
+<<<<<<< HEAD
 "@babel/helper-create-class-features-plugin@^7.12.13":
   version "7.12.16"
   resolved "https://registry.yarnpkg.com/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.12.16.tgz#955d5099fd093e5afb05542190f8022105082c61"
@@ -281,6 +282,13 @@
   integrity sha512-kocDQvIbgMKlWxXe9fof3TQ+gkIPOUSEYhJjqUjvKMez3krV7vbzYCDq39Oj11UAVK7JqPVGQPlgE85dPNlQww==
   dependencies:
     "@babel/helper-validator-identifier" "^7.12.11"
+=======
+"@babel/highlight@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0.tgz#f710c38c8d458e6dd9a201afb637fcb781ce99e4"
+  integrity sha512-UFMC4ZeFC48Tpvj7C8UgLvtkaUuovQX+5xNWrsIoMG8o2z+XFKjKaN9iVmS84dPwVN00W4wPmqvYoZF3EGAsfw==
+  dependencies:
+>>>>>>> 3993-z-offset
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 

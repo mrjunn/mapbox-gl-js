@@ -136,11 +136,11 @@ function addVertex(array, anchorX, anchorY, ox, oy, tx, ty, sizeVertex, isSDF: b
     );
 }
 
-function addDynamicAttributes(dynamicLayoutVertexArray: StructArray, p: Point, angle: number) {
-    dynamicLayoutVertexArray.emplaceBack(p.x, p.y, angle);
-    dynamicLayoutVertexArray.emplaceBack(p.x, p.y, angle);
-    dynamicLayoutVertexArray.emplaceBack(p.x, p.y, angle);
-    dynamicLayoutVertexArray.emplaceBack(p.x, p.y, angle);
+function addDynamicAttributes(dynamicLayoutVertexArray: StructArray, p: Point, z: number, angle: number) {
+    dynamicLayoutVertexArray.emplaceBack(p.x, p.y, z, angle);
+    dynamicLayoutVertexArray.emplaceBack(p.x, p.y, z, angle);
+    dynamicLayoutVertexArray.emplaceBack(p.x, p.y, z, angle);
+    dynamicLayoutVertexArray.emplaceBack(p.x, p.y, z, angle);
 }
 
 function containsRTLText(formattedText: Formatted): boolean {
@@ -433,6 +433,7 @@ class SymbolBucket implements Bucket {
         // and null returned because icon-image wasn't defined is to check whether or not iconImage.parameters is an empty object
         const hasIcon = iconImage.value.kind !== 'constant' || !!iconImage.value.value || Object.keys(iconImage.parameters).length > 0;
         const symbolSortKey = layout.get('symbol-sort-key');
+        const symbolZOffset = layout.get('symbol-z-offset');
 
         this.features = [];
 
@@ -490,6 +491,12 @@ class SymbolBucket implements Bucket {
             if (!text && !icon) {
                 continue;
             }
+<<<<<<< HEAD
+=======
+
+            const zOffset = symbolZOffset.evaluate(feature, {});
+            console.log('zOffset', zOffset);
+>>>>>>> 3993-z-offset
             const sortKey = this.sortFeaturesByKey ?
                 symbolSortKey.evaluate(evaluationFeature, {}, canonical) :
                 undefined;
@@ -503,7 +510,8 @@ class SymbolBucket implements Bucket {
                 geometry: evaluationFeature.geometry,
                 properties: feature.properties,
                 type: vectorTileFeatureTypes[feature.type],
-                sortKey
+                sortKey,
+                zOffset
             };
             this.features.push(symbolFeature);
 
@@ -645,7 +653,11 @@ class SymbolBucket implements Bucket {
             addVertex(layoutVertexArray, labelAnchor.x, labelAnchor.y, bl.x, y + bl.y, tex.x, tex.y + tex.h, sizeVertex, isSDF, pixelOffsetTL.x, pixelOffsetBR.y, minFontScaleX, minFontScaleY);
             addVertex(layoutVertexArray, labelAnchor.x, labelAnchor.y, br.x, y + br.y, tex.x + tex.w, tex.y + tex.h, sizeVertex, isSDF, pixelOffsetBR.x, pixelOffsetBR.y, minFontScaleX, minFontScaleY);
 
+<<<<<<< HEAD
             addDynamicAttributes(arrays.dynamicLayoutVertexArray, labelAnchor, angle);
+=======
+            addDynamicAttributes(dynamicLayoutVertexArray, labelAnchor, feature.zOffset, 0);
+>>>>>>> 3993-z-offset
 
             indexArray.emplaceBack(index, index + 1, index + 2);
             indexArray.emplaceBack(index + 1, index + 2, index + 3);

@@ -9,7 +9,7 @@ export const symbolLayoutAttributes = createLayout([
 ], 4);
 
 export const dynamicLayoutAttributes = createLayout([
-    {name: 'a_projected_pos', components: 3, type: 'Float32'}
+    { name: 'a_projected_pos', components: 4, type: 'Float32' }
 ], 4);
 
 export const placementOpacityAttributes = createLayout([
@@ -28,8 +28,9 @@ export const collisionVertexAttributesExt = createLayout([
 
 export const collisionBox = createLayout([
     // the box is centered around the anchor point
-    {type: 'Int16', name: 'anchorPointX'},
-    {type: 'Int16', name: 'anchorPointY'},
+    { type: 'Int16', name: 'anchorPointX' },
+    { type: 'Int16', name: 'anchorPointY' },
+    { type: 'Int16', name: 'anchorPointZ' },
 
     // distances to the edges from the anchor
     {type: 'Float32', name: 'x1'},
